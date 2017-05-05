@@ -1,24 +1,27 @@
-var express = require('express');
+const express = require('express');
+const router = require('./routes.js');
 
-var app = express();
+const app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.post('/repos/import', function (req, res) {
+app.use('/api', router);
+
+app.post('/repos/import', (req, res) => {
   // TODO
   // github api post request 
   
 });
 
-app.get('/repos', function (req, res) {
+app.get('/repos', (req, res) => {
   // TODO
   // get data from db
-  res.send('Getting data from db');
+  res.send('Db is up and running');
 });
 
-var port = 1128;
+const port = process.env.port || 1128;
 
-app.listen(port, function() {
+app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
 

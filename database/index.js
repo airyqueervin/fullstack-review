@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fetcher');
+mongoose.Promise = require('bluebird');
 
-var repoSchema = mongoose.Schema({
-  name: String,
-  repo_url: String
-
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('CONNECT TO THE fetcher DATABASE')
 });
 
-var Repo = mongoose.model('Repo', repoSchema);
-
-module.exports = Repo;
+module.exports = db;

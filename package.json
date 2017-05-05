@@ -7,7 +7,7 @@
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "db-start": "mongod --dbpath ./database/data/db",
-    "seed": "node server /seed.js"
+    "seed": "node server/seed.js"
   },
   "author": "Beth Johnson",
   "license": "ISC",

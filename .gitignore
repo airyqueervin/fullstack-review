@@ -3,4 +3,3 @@ client/dist/bundle.js
 database/data/db
 .vscode
 .DS_store
-client/dist/bundle.js

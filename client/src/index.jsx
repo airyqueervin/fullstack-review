@@ -15,11 +15,19 @@ class App extends React.Component {
   }
 
   search (term) {
-    console.log(`${term} was searched`);
-    axios.post('/repos/import', term)
-    .then(({data}) => {
-      alert('This is data', data)
-      this.setState(this.state.repos.push(data));
+    axios.get('https://api.github.com/orgs/octokit/repos')
+    .then(data => {
+      console.log(data);
+    }).catch(err => {
+      console.error(err);
+    })
+    .then(() =>{
+      console.log(`${term} was searched`);
+      axios.post('/repos/import', term)
+      .then(({data}) => {
+        alert('This is data', data)
+        this.setState(this.state.repos.push(data));
+      })
     })
     .catch(err => {
       console.error(err);
