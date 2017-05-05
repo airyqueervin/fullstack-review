@@ -3,8 +3,8 @@ const router = express.Router();
 const routeCtrl = require('./routeController');
 
 router.get('/repos', routeCtrl.getRepos);
+// router.post('/repos', routeCtrl.logRepo);
 
-// router.post('/tweets', routeCtrl.addNewTweet);
-// router.post('/twitter', routeCtrl.postTweet);
+// router.post('/repos/import', routeCtrl.addRepo);
 
 module.exports = router;

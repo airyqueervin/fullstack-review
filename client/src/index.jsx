@@ -12,27 +12,48 @@ class App extends React.Component {
       repos: []
     }
 
+    this.getRepos = this.getRepos.bind(this);
+
   }
 
   search (term) {
-    axios.get('https://api.github.com/orgs/octokit/repos')
-    .then(data => {
-      console.log(data);
+    axios.get(`https://api.github.com/search/repositories?q=${term}`)
+    .then(repoData => {
+      repoData.data.items.forEach(repo => {
+        console.log('repo', repo)
+        this.state.repos.push(repo);
+        console.log(this.state.repos)
+      });
+      this.setState(this.state.repos.push(repoData));
+      console.log(repos);
     }).catch(err => {
       console.error(err);
     })
     .then(() =>{
       console.log(`${term} was searched`);
-      axios.post('/repos/import', term)
-      .then(({data}) => {
-        alert('This is data', data)
-        this.setState(this.state.repos.push(data));
-      })
+      this.getRepos();
+      // axios.post('/repos/import', term)
+      // .then(({data}) => {
+      //   alert('This is data', data)
+      //   this.setState(this.state.repos.push(data));
+      // })
     })
     .catch(err => {
       console.error(err);
     })
 
+  }
+
+   getRepos() {
+    axios.get('/api/repos')
+      .then(({ data }) => {
+        this.setState({
+          repos: data
+        });
+      })
+      .catch(err => {
+        console.error("Fucking thing failed", err);
+      });
   }
 
   render () {
