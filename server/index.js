@@ -6,11 +6,14 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/repos/import', function (req, res) {
   // TODO
+  // github api post request 
   
 });
 
 app.get('/repos', function (req, res) {
   // TODO
+  // get data from db
+  res.send('Getting data from db');
 });
 
 var port = 1128;
